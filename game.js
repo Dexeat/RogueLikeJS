@@ -3,12 +3,16 @@ var config = {
     parent: 'phaser-example',
     physics: {
         default: 'arcade',
+        arcade:{
+            debug: true
+        },
+        
     },
     scene: {
         preload: preload,
         create: create,
         update: update
-    }
+    },
 };
 
 var player;
@@ -19,26 +23,33 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     this.load.image('bg', 'assets/fond/html-color-codes-color-tutorials-hero-00e10b1f.jpg');
-    this.load.image('block', 'assets/char/char.png');
+    this.load.image('char', 'assets/char/char.png');
+    this.load.image('rock','assets/decor/Edwig.png')
 }
 
 function create ()
 {
+    //limite de la cam + le monde
     this.cameras.main.setBounds(0, 0, 1920 * 2, 1080 * 2);
     this.physics.world.setBounds(0, 0, 1920 * 2, 1080 * 2);
+    //Groupe
+    rock = this.physics.add.staticGroup();
 
+
+
+    //fond
     this.add.image(0, 0, 'bg').setOrigin(0);
-    //this.add.image(1920, 0, 'bg').setOrigin(0).setFlipX(true);
-    //this.add.image(0, 1080, 'bg').setOrigin(0).setFlipY(true);
-    //this.add.image(1920, 1080, 'bg').setOrigin(0).setFlipX(true).setFlipY(true);
-
+    
     cursors = this.input.keyboard.createCursorKeys();
-
-    player = this.physics.add.image(400, 300, 'block');
-
+    player = this.physics.add.image(400, 300, 'char');
     player.setCollideWorldBounds(true);
-
     this.cameras.main.startFollow(player, true, 0.05, 0.05);
+
+    //ajout des groupes
+    rock.create(600, 400, 'rock');
+
+    //colision
+    this.physics.add.collider(player, rock);
 }
 
 function update ()
