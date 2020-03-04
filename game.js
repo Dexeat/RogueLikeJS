@@ -17,6 +17,7 @@ var config = {
 
 var player;
 var cursors;
+var ennemy;
 
 
 var game = new Phaser.Game(config);
@@ -26,6 +27,7 @@ function preload ()
     this.load.image('bg', 'assets/fond/html-color-codes-color-tutorials-hero-00e10b1f.jpg');
     this.load.image('char', 'assets/char/char.png');
     this.load.image('rock','assets/decor/Edwig.png')
+    this.load.image('enemy','assets/char/android.png')
 }
 
 function create ()
@@ -43,10 +45,13 @@ function create ()
     
     cursors = this.input.keyboard.createCursorKeys();
     player = this.physics.add.image(0, 0, 'char');
+    //ennemy = this.physics.add.image(400,800,'enemy');
     player.setCollideWorldBounds(true);
     this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
-    
+    //follow test
+    /*ennemy = this.add.follower(player,400,800,'enemy');
+    ennemy.startFollow(9000);*/
 
     //ajout des groupes
     rock.create(600, 400, 'rock');
