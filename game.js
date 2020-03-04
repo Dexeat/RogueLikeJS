@@ -42,7 +42,7 @@ function create ()
     fond = this.add.image(0, 0, 'bg').setOrigin(0);
     
     cursors = this.input.keyboard.createCursorKeys();
-    player = this.physics.add.image(400, 300, 'char');
+    player = this.physics.add.image(0, 0, 'char');
     player.setCollideWorldBounds(true);
     this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
@@ -50,6 +50,8 @@ function create ()
 
     //ajout des groupes
     rock.create(600, 400, 'rock');
+    rock.create(400, 400, 'rock');
+    rock.create(400, 200, 'rock');
 
     //colision
     this.physics.add.collider(player, rock);
