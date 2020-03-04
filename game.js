@@ -18,6 +18,7 @@ var config = {
 var player;
 var cursors;
 
+
 var game = new Phaser.Game(config);
 
 function preload ()
@@ -38,12 +39,14 @@ function create ()
 
 
     //fond
-    this.add.image(0, 0, 'bg').setOrigin(0);
+    fond = this.add.image(0, 0, 'bg').setOrigin(0);
     
     cursors = this.input.keyboard.createCursorKeys();
     player = this.physics.add.image(400, 300, 'char');
     player.setCollideWorldBounds(true);
     this.cameras.main.startFollow(player, true, 0.05, 0.05);
+
+    
 
     //ajout des groupes
     rock.create(600, 400, 'rock');
